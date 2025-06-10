@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Z.E.P.T.R.O</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zeptro: Next-gen play-to-earn gaming universe. Play. Dominate. Earn.">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #42e2f4;
+      --accent2: #6454eb;
+      --dark: #0e1337;
+      --mid: #1a2158;
+      --overlay: rgba(10,20,40,0.44);
+      --glass: rgba(66,226,244,0.13);
+      --completed: #42e2f4;
+      --active: #ffd700;
+      --future: #6454eb;
+    }
+    body, * {
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Orbitron', Arial, sans-serif;
+      color: #fff;
+      background: url('background.png') no-repeat center center, linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+      background-size: cover;
+      background-attachment: fixed;
+      background-blend-mode: overlay;
+      transition: background-position 0.1s;
+      overflow-x: hidden;
+    }
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      filter: brightness(0.55) blur(1px);
+    }
+    .animated-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 70% 30%, var(--glass) 0%, transparent 70%),
+                  radial-gradient(ellipse at 30% 70%, rgba(100,84,235,0.10) 0%, transparent 70%);
+      mix-blend-mode: lighten;
+      z-index: 1;
+      pointer-events: none;
+      animation: overlayMove 8s linear infinite alternate;
+    }
+    @keyframes overlayMove {
+      0% {background-position: 70% 30%, 30% 70%;}
+      100% {background-position: 80% 40%, 20% 60%;}
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,20,40,0.37);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .back-public-btn {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 102;
+      background: rgba(66,226,244,0.14);
+      color: var(--accent);
+      border: 1.2px solid var(--accent2);
+      border-radius: 9px;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 4px 12px 4px 8px;
+      text-shadow: 0 0 8px #42e2f4b0;
+      box-shadow: 0 0 9px #6454eb50;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border 0.2s, transform 0.13s;
+      outline: none;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 26px;
+      min-width: 0;
+      line-height: 1;
+      opacity: 0.84;
+    }
+    .back-public-btn:hover, .back-public-btn:focus {
+      background: var(--accent);
+      color: #222;
+      border-color: #fff;
+      transform: scale(1.035);
+      box-shadow: 0 0 14px #42e2f4cc;
+    }
+    .back-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 2px;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 2px #42e2f4c2);
+    }
+    .back-public-btn span {
+      font-size: 0.84em;
+      white-space: nowrap;
+    }
+    .logo-container {
+      position: fixed;
+      top: 18px;
+      right: 32px;
+      z-index: 101;
+      background: rgba(11,17,56,0.49);
+      border-radius: 20px;
+      padding: 7px 9px;
+      box-shadow: 0 0 22px var(--accent2);
+      pointer-events: auto;
+    }
+    .logo-img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: rgba(20,20,40,0.14);
+      transition: transform 0.18s, box-shadow 0.18s;
+      cursor: pointer;
+      box-shadow: 0 0 18px var(--accent);
+    }
+    .logo-img:hover {
+      transform: scale(1.09) rotate(-2deg);
+      box-shadow: 0 0 40px var(--accent2);
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      background: rgba(11, 17, 56, 0.79);
+      display: flex;
+      justify-content: center;
+      gap: 2.4rem;
+      padding: 1rem 0 0.8rem 0;
+      box-shadow: 0 2px 16px #0005;
+      backdrop-filter: blur(7px);
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.19rem;
+      letter-spacing: 0.09em;
+      font-weight: 700;
+      border-bottom: 2px solid transparent;
+      transition: color 0.23s, border 0.19s;
+      padding-bottom: 0.1em;
+    }
+    nav a.active, nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px var(--accent), 0 0 4px #fff;
+      border-bottom: 2.5px solid var(--accent);
+    }
+    .content {
+      position: relative;
+      z-index: 3;
+      padding: 2.2rem 2rem 2.5rem 2rem;
+      text-align: center;
+      margin-top: 13vh;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--overlay);
+      border-radius: 26px;
+      box-shadow: 0 0 34px #000c;
+      backdrop-filter: blur(5px);
+    }
+    .main-title {
+      font-size: 3.2rem;
+      letter-spacing: 0.13em;
+      margin-bottom: 1.22rem;
+      text-shadow: 0 0 32px #00f7, 0 0 8px #00eafc;
+      animation: titleGlow 2.5s alternate infinite;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 32px var(--accent), 0 0 8px #00eafc; }
+      50% { text-shadow: 0 0 64px var(--accent), 0 0 24px #fff; }
+    }
+    .subtitle {
+      font-size: 1.27rem;
+      color: #aef;
+      margin-bottom: 2.3rem;
+      text-shadow: 0 0 8px #000b;
+      letter-spacing: 0.07em;
+      font-weight: 500;
+    }
+    section {
+      margin-bottom: 2.8rem;
+      text-align: left;
+    }
+    h2 {
+      font-size: 1.59rem;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.09em;
+      text-shadow: 0 0 14px #00eafc33;
+      text-transform: uppercase;
+    }
+    ul, ol {
+      padding-left: 1.3em;
+      margin-bottom: 1.1em;
+    }
+    .spacer { height: 6vh; width: 100%; }
+    @media (max-width: 700px) {
+      .main-title { font-size: 1.65rem; }
+      .content { padding: 0.65rem; }
+      h2 { font-size: 1.04rem;}
+      nav { gap: 1rem; font-size: 1rem;}
+      .logo-container {
+        right: 11px;
+        top: 7px;
+        padding: 3px 4px;
+      }
+      .back-public-btn {
+        left: 4px;
+        top: 4px;
+        padding: 2px 8px 2px 4px;
+        font-size: 0.73rem;
+        height: 20px;
+      }
+      .logo-img {
+        width: 38px;
+        height: 38px;
+      }
+      .back-icon {
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .hidden { display: none; }
+
+    /* Botton styles */
+    .zeptro-action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2.2em;
+      margin: 2.5rem 0;
+    }
+    .zeptro-btn {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+      color: #141c2f;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-weight: 700;
+      border: none;
+      border-radius: 13px;
+      font-size: 1.27rem;
+      padding: 0.93em 2.4em;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      box-shadow: 0 0 18px #42e2f433;
+      transition: background 0.2s, color 0.2s, transform 0.13s, box-shadow 0.2s;
+      outline: none;
+      text-shadow: 0 0 8px #fff7;
+    }
+    .zeptro-btn:hover, .zeptro-btn:focus {
+      background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
+      color: #fff;
+      transform: scale(1.055) rotate(-2deg);
+      box-shadow: 0 0 32px #42e2f499;
+    }
+
+    /* Slide-down panel styles */
+    .zeptro-panel {
+      max-width: 700px;
+      margin: 0 auto 2.2em auto;
+      background: rgba(20,28,58,0.75);
+      border-radius: 17px;
+      box-shadow: 0 0 18px #42e2f455;
+      overflow: hidden;
+      transition: max-height 0.7s cubic-bezier(.6,0,.2,1), opacity 0.4s;
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: relative;
+    }
+    .zeptro-panel.active {
+      max-height: 1100px;
+      opacity: 1;
+      pointer-events: auto;
+      margin-bottom: 2.2em;
+    }
+    .panel-inner {
+      padding: 2rem 1.3rem 1.4rem 1.3rem;
+    }
+    .panel-title {
+      font-size: 1.42rem;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+      margin-top: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 8px var(--accent2);
+    }
+    .panel-title:first-child { margin-top: 0; }
+    .panel-text {
+      font-size: 1.09rem;
+      color: #e5f8ff;
+      margin-bottom: 0.7em;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      opacity: 0.95;
+      line-height: 1.68;
+      text-shadow: 0 0 7px #000c;
+    }
+    @media (max-width: 700px) {
+      .panel-inner { padding: 1.1rem 0.5rem 0.7rem 0.5rem; }
+      .panel-title { font-size: 1.01rem;}
+      .panel-text { font-size: 0.97rem;}
+      .zeptro-action-buttons {
+        flex-direction: column;
+        gap: 1.3em;
+      }
+      .zeptro-btn {
+        width: 90%;
+        font-size: 1.05rem;
+        padding: 0.7em 0;
+      }
+    }
+    /* Progress Bar Section ... (unchanged) ... */
+    .roadmap-container {
+      margin: 0 auto 2.6rem auto;
+      background: rgba(20,28,58,0.32);
+      border-radius: 18px;
+      padding: 2.2rem 1.1rem 1.5rem 1.1rem;
+      box-shadow: 0 0 16px #42e2f433;
+      max-width: 800px;
+    }
+    .roadmap-title {
+      text-align: center;
+      font-size: 2.1rem;
+      color: var(--accent);
+      margin-bottom: 1.7rem;
+      letter-spacing: 0.12em;
+      text-shadow: 0 0 18px var(--accent2);
+      font-weight: 700;
+    }
+    .roadmap-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .roadmap-phase {
+      display: flex;
+      align-items: center;
+      margin: 1.2rem 0;
+      gap: 1.2rem;
+      position: relative;
+    }
+    .roadmap-phase .phase-label {
+      min-width: 45px;
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.08em;
+      text-shadow: 0 0 7px var(--accent2);
+      opacity: 0.8;
+      letter-spacing: 0.01em;
+    }
+    .roadmap-phase .phase-bar-bg {
+      flex: 1;
+      height: 16px;
+      background: rgba(66,226,244,0.09);
+      border-radius: 9px;
+      position: relative;
+      margin-right: 0.4em;
+      overflow: hidden;
+    }
+    .phase-bar-fill {
+      height: 100%;
+      border-radius: 9px;
+      transition: width 0.7s cubic-bezier(.55,0,.1,1);
+      box-shadow: 0 0 12px 2px #42e2f455;
+      background: linear-gradient(90deg, var(--completed), var(--accent2));
+    }
+    .phase-bar-fill.active {
+      background: linear-gradient(90deg, var(--active) 25%, #fff 100%);
+      box-shadow: 0 0 16px 2px #ffd700aa;
+    }
+    .phase-bar-fill.future {
+      background: linear-gradient(90deg, var(--future) 0%, #1a2158 100%);
+      opacity: 0.6;
+      box-shadow: none;
+    }
+    .phase-status {
+      min-width: 90px;
+      text-align: right;
+      font-size: 0.98em;
+      font-weight: 700;
+      margin-left: 0.3em;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 8px #000b;
+    }
+    .phase-status.completed {
+      color: var(--completed);
+    }
+    .phase-status.active {
+      color: var(--active);
+    }
+    .phase-status.future {
+      color: var(--future);
+      opacity: 0.8;
+    }
+    .phase-desc {
+      width: 100%;
+      margin-left: 0.9em;
+      color: #bdefff;
+      font-size: 1.04em;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      opacity: 0.9;
+    }
+    @media (max-width: 700px) {
+      .roadmap-container { padding: 1.3rem 0.2rem; }
+      .roadmap-title { font-size: 1.28rem; }
+      .roadmap-phase { flex-direction: column; align-items: flex-start; gap: 0.38em;}
+      .phase-status { min-width: auto; margin: 0.1em 0 0.3em 0; }
+      .phase-desc { margin-left: 0; margin-top: 0.18em;}
+    }
+  </style>
+</head>
+<body>
+  <video class="bg-video" src="anime-war-video.mp4" autoplay loop muted playsinline></video>
+  <div class="animated-overlay"></div>
+  <div class="overlay"></div>
+  <!-- BACK TO PUBLIC VIEW BUTTON (now compact) -->
+  <button class="back-public-btn" onclick="backToPublicView()" title="Back to Public View">
+    <svg class="back-icon" viewBox="0 0 24 24" fill="none"><path d="M13.5 19L7.5 12L13.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Back</span>
+  </button>
+  <!-- LOGO TOP RIGHT -->
+  <div class="logo-container">
+    <img src="logo.png" alt="Zeptro Logo" class="logo-img" />
+  </div>
+  <nav>
+    <a href="#" onclick="showPage('about');return false;" id="nav-about">About</a>
+    <a href="#" onclick="showPage('features');return false;" id="nav-features">Features</a>
+    <a href="#" onclick="showPage('tokenomics');return false;" id="nav-tokenomics">Tokenomics</a>
+    <a href="#" onclick="showPage('nfts');return false;" id="nav-nfts">NFTs</a>
+    <a href="#" onclick="showPage('lore');return false;" id="nav-lore">Game Lore</a>
+    <a href="#" onclick="showPage('progress');return false;" id="nav-progress">Project Progress</a>
+  </nav>
+  <div class="spacer"></div>
+  <main class="content">
+    <!-- ABOUT PAGE -->
+    <section id="about-section">
+      <div class="main-title">Z.E.P.T.R.O</div>
+      <div class="subtitle">Play. Dominate. Earn.<br>Level Up in Real Life.</div>
+      <section class="zeptro-meaning">
+        <h2>What does <span style="color:#fff;">Z.E.P.T.R.O</span> stand for?</h2>
+        <ul>
+          <li><b>Z</b> <span>Zero-latency connections for seamless, uninterrupted gameplay.</span></li>
+          <li><b>E</b> <span>Epic immersive worlds with cinematic storytelling and rich lore.</span></li>
+          <li><b>P</b> <span>Precision-driven mechanics enabling high-stakes, competitive gaming.</span></li>
+          <li><b>T</b> <span>Trailblazing technology powering cutting-edge Web3 experiences.</span></li>
+          <li><b>R</b> <span>Revolutionary blockchain integration for true digital ownership and security.</span></li>
+          <li><b>O</b> <span>Optimized performance for smooth, next-generation gaming.</span></li>
+        </ul>
+      </section>
+      <!-- ACTION BUTTONS WITH SLIDE PANELS -->
+      <div class="zeptro-action-buttons">
+        <button class="zeptro-btn" id="for-gamers-btn">FOR GAMERS</button>
+        <button class="zeptro-btn" id="for-investors-btn">FOR INVESTORS</button>
+      </div>
+      <!-- Hidden panels for Mission & Vision -->
+      <div id="gamers-panel" class="zeptro-panel">
+        <div class="panel-inner">
+          <div class="panel-title">🎯 Mission</div>
+          <div class="panel-text">
+            At Zeptro, we believe your skills should build your future. We’re here to give every gamer the power to earn real rewards, grow real wealth, and shape their destiny—not through luck, but through dedication, passion, and strategy.<br><br>
+            Zeptro is where your talent is valued, your victories are meaningful, and your grind has purpose.
+          </div>
+          <div class="panel-title">🌍 Vision</div>
+          <div class="panel-text">
+            We’re building a world where everyone has a fair shot. It doesn’t matter where you’re from, how you start, or who you know—what matters is what you can do.<br><br>
+            In the Zeptro universe, your skill is your currency, your effort is your investment, and your success is truly your own.<br>
+            Together, we can create a global, player-driven community where the best rise to the top, not because they paid for it—but because they earned it.
+          </div>
+        </div>
+      </div>
+      <div id="investors-panel" class="zeptro-panel">
+        <div class="panel-inner">
+          <div class="panel-title">🎯 Mission</div>
+          <div class="panel-text">
+            Zeptro’s mission is to empower gamers to generate sustainable, real-world wealth through skill-based gameplay. By focusing on performance-based rewards rather than pay-to-win models, Zeptro is positioned to redefine the gaming economy, enabling players to earn tangible value through dedication, talent, and strategy.<br><br>
+            Our platform integrates competitive gaming with blockchain-powered asset ownership, creating a secure, scalable ecosystem that aligns player incentives with long-term economic growth.
+          </div>
+          <div class="panel-title">🌍 Vision</div>
+          <div class="panel-text">
+            Zeptro aims to build a decentralized, equitable gaming ecosystem where success is driven by merit and community participation. We envision a future where gamers, regardless of background or geography, can achieve upward mobility through their skills.<br><br>
+            Our platform’s architecture combines decentralized finance (DeFi), NFTs, and community governance to ensure transparency, security, and shared ownership. Zeptro is committed to leading the evolution of the play-to-earn landscape by delivering measurable value to both players and stakeholders, while fostering a thriving, sustainable gaming economy.
+          </div>
+        </div>
+      </div>
+      <!-- ...other about content unchanged... -->
+      <section>
+        <h2>What is Zeptro?</h2>
+        <p>Zeptro is a next-gen play-to-earn gaming universe, featuring <b>Dominion</b>, our flagship game, and a powerful crypto and NFT ecosystem.</p>
+      </section>
+      <section>
+        <h2>Brand Core Values</h2>
+        <div class="core-values">
+          <div class="core-value">Skill Over Luck</div>
+          <div class="core-value">Fairness & Security</div>
+          <div class="core-value">Play-to-Earn For All</div>
+        </div>
+      </section>
+    </section>
+    <!-- FEATURES PAGE -->
+    <section id="features-section" class="hidden">
+      <div class="main-title">Features</div>
+      <div class="taglines">
+        <div class="tagline">Play. Dominate. Earn. Level Up in Real Life.</div>
+        <div class="tagline">The Game Where You Get Rich By Playing.</div>
+        <div class="tagline">Unleash. Level. Earn.</div>
+      </div>
+      <ul>
+        <li><b>Zero-Latency Precision Gaming</b></li>
+        <li><b>Zeptro-DeFi:</b> Native Cryptocurrency</li>
+        <li><b>Dominion:</b> A Skill-Based Wealth Building Game</li>
+        <li><b>Free Tradable NFTs</b></li>
+        <li><b>KYC Membership:</b> One Account, One Identity</li>
+      </ul>
+    </section>
+    <!-- TOKENOMICS PAGE -->
+    <section id="tokenomics-section" class="hidden">
+      <div class="main-title">Tokenomics</div>
+      <section>
+        <h2>Token Name</h2>
+        <p><b>Zeptro-DeFi (ZDF)</b></p>
+        <h2>Total Supply</h2>
+        <p>1 Billion ZDF</p>
+        <h2>Distribution</h2>
+        <table class="token-table">
+          <tr><th>Category</th><th>Allocation</th></tr>
+          <tr><td>Game Rewards</td><td>40%</td></tr>
+          <tr><td>Staking Rewards</td><td>20%</td></tr>
+          <tr><td>Team & Development (Vesting)</td><td>15%</td></tr>
+          <tr><td>Marketing & Partnerships</td><td>10%</td></tr>
+          <tr><td>NFT Marketplace Incentives</td><td>10%</td></tr>
+          <tr><td>Liquidity Pool</td><td>5%</td></tr>
+        </table>
+        <h2>Utility</h2>
+        <ul>
+          <li>In-game purchases</li>
+          <li>Marketplace transactions</li>
+          <li>Staking for governance and rewards</li>
+          <li>Token burns to control inflation</li>
+        </ul>
+        <h2>Governance</h2>
+        <p>Players with staked tokens can vote on future platform decisions.</p>
+      </section>
+    </section>
+    <!-- NFT PAGE -->
+    <section id="nfts-section" class="hidden">
+      <div class="main-title">NFT System</div>
+      <section>
+        <h2>Types of NFTs</h2>
+        <ul>
+          <li>Characters</li>
+          <li>Weapons</li>
+          <li>Skins</li>
+          <li>Limited Edition Drops</li>
+        </ul>
+        <h2>How to Earn</h2>
+        <ul>
+          <li>Complete in-game quests</li>
+          <li>Win PvP tournaments</li>
+          <li>Participate in seasonal events</li>
+        </ul>
+        <h2>Marketplace Features</h2>
+        <ul>
+          <li>Buy/Sell NFTs for Zeptro-DeFi</li>
+          <li>Trade limited NFTs</li>
+          <li>Auction rare items</li>
+        </ul>
+        <h2>NFT Rarity System</h2>
+        <div class="rarity-row">
+          <span class="rarity-badge common">Common</span>
+          <span class="rarity-badge uncommon">Uncommon</span>
+          <span class="rarity-badge rare">Rare</span>
+          <span class="rarity-badge epic">Epic</span>
+          <span class="rarity-badge legendary">Legendary</span>
+        </div>
+      </section>
+    </section>
+    <!-- LORE PAGE -->
+    <section id="lore-section" class="hidden">
+      <div class="main-title">Game Lore: Dominion</div>
+      <section>
+        <h2>Game Concept</h2>
+        <p>
+          <b>Dominion</b>: In a fragmented universe known as The Dominion, players (<b>Pathbreakers</b>) battle through endless realms to claim territory, power, and crypto treasures.
+        </p>
+        <h2>Lore Overview</h2>
+        <ul>
+          <li><b>The Dominion:</b> Multi-layered world of ruins, cities, and dungeons.</li>
+          <li><b>Pathbreakers:</b> Elite gamers with the power to shape reality through earned NFTs.</li>
+          <li><b>The Core War:</b> Cosmic battle for rare "Core Fragments" that generate crypto wealth.</li>
+        </ul>
+      </section>
+    </section>
+    <!-- PROJECT PROGRESS PAGE -->
+    <section id="progress-section" class="hidden">
+      <div class="main-title">Project Progress</div>
+      <div class="roadmap-container">
+        <div class="roadmap-title">Roadmap Timeline</div>
+        <ul class="roadmap-list">
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 1</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill" style="width:100%"></div>
+            </div>
+            <span class="phase-status completed">Completed</span>
+            <span class="phase-desc">Brand & Concept Development</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 2</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill active" style="width:60%"></div>
+            </div>
+            <span class="phase-status active">Q3 2025</span>
+            <span class="phase-desc">Dominion Game Alpha Build</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 3</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill future" style="width:0%"></div>
+            </div>
+            <span class="phase-status future">Q4 2025</span>
+            <span class="phase-desc">Zeptro-DeFi Smart Contract Launch</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 4</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill future" style="width:0%"></div>
+            </div>
+            <span class="phase-status future">Q4 2025</span>
+            <span class="phase-desc">NFT Marketplace Beta</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 5</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill future" style="width:0%"></div>
+            </div>
+            <span class="phase-status future">Q1 2026</span>
+            <span class="phase-desc">KYC Membership System</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 6</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill future" style="width:0%"></div>
+            </div>
+            <span class="phase-status future">Q2 2026</span>
+            <span class="phase-desc">Full Platform Launch</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 7</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill future" style="width:0%"></div>
+            </div>
+            <span class="phase-status future">Q3 2026</span>
+            <span class="phase-desc">Dominion Competitive Tournaments</span>
+          </li>
+          <li class="roadmap-phase">
+            <span class="phase-label">Phase 8</span>
+            <div class="phase-bar-bg">
+              <div class="phase-bar-fill future" style="width:0%"></div>
+            </div>
+            <span class="phase-status future">Q4 2026</span>
+            <span class="phase-desc">Governance Token Rollout</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <div class="spacer"></div>
+  <script>
+    function showPage(page) {
+      let sections = ['about', 'features', 'tokenomics', 'nfts', 'lore', 'progress'];
+      sections.forEach(s => {
+        let sec = document.getElementById(s + '-section');
+        if (sec) sec.classList.add('hidden');
+        let nav = document.getElementById('nav-' + s);
+        if (nav) nav.classList.remove('active');
+      });
+      let showSec = document.getElementById(page + '-section');
+      if (showSec) showSec.classList.remove('hidden');
+      let showNav = document.getElementById('nav-' + page);
+      if (showNav) showNav.classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    // Default: show About
+    showPage('about');
+    window.addEventListener('scroll', function() {
+      const offset = window.pageYOffset;
+      document.body.style.backgroundPosition = `center ${offset * 0.13}px`;
+    });
+    // Optionally, make logo a home button:
+    document.querySelector('.logo-img').addEventListener('click', function() {
+      showPage('about');
+    });
+    // BACK TO PUBLIC VIEW BUTTON
+    function backToPublicView() {
+      window.location.href = "/";
+    }
+    // BLOCK COPY, SELECTION, RIGHT-CLICK, DRAG
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && ['c','x','v','a','u','s'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+    // SLIDE DOWN PANELS FOR GAMERS/INVESTORS
+    const gamersBtn = document.getElementById("for-gamers-btn");
+    const investorsBtn = document.getElementById("for-investors-btn");
+    const gamersPanel = document.getElementById("gamers-panel");
+    const investorsPanel = document.getElementById("investors-panel");
+
+    // Hide both panels initially
+    gamersPanel.classList.remove('active');
+    investorsPanel.classList.remove('active');
+
+    // Panel logic: only one visible, toggle
+    gamersBtn.onclick = function() {
+      if (!gamersPanel.classList.contains('active')) {
+        gamersPanel.classList.add('active');
+        investorsPanel.classList.remove('active');
+        // Scroll to panel if not in view
+        setTimeout(() => {
+          gamersPanel.scrollIntoView({behavior:'smooth', block:'center'});
+        }, 130);
+      } else {
+        gamersPanel.classList.remove('active');
+      }
+    };
+    investorsBtn.onclick = function() {
+      if (!investorsPanel.classList.contains('active')) {
+        investorsPanel.classList.add('active');
+        gamersPanel.classList.remove('active');
+        setTimeout(() => {
+          investorsPanel.scrollIntoView({behavior:'smooth', block:'center'});
+        }, 130);
+      } else {
+        investorsPanel.classList.remove('active');
+      }
+    };
+  </script>
+</body>
+</html>
