@@ -104,6 +104,9 @@
       font-weight: 700;
       box-shadow: 0 2px 10px rgba(25,118,210,0.10);
       transition: background 0.2s, color 0.2s, box-shadow 0.22s;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
     }
     .cta-btn:hover {
       background: var(--accent);
@@ -180,11 +183,6 @@
       if (localStorage.getItem('loggedIn') === 'true') {
         window.location.href = 'dashboard.html';
       }
-      // Smooth scroll for CTA
-      document.getElementById('cta-features').onclick = function(e){
-        e.preventDefault();
-        document.getElementById('features').scrollIntoView({behavior: 'smooth'});
-      }
     });
   </script>
 </head>
@@ -200,7 +198,7 @@
     <section class="hero">
       <h1>Welcome to Zeptro</h1>
       <p>The modern platform for productivity, collaboration, and innovation. Join Zeptro today and unlock your potential!</p>
-      <button class="cta-btn" id="cta-features">Learn More</button>
+      <a href="what is zeptro.html" class="cta-btn" id="cta-features">Learn More</a>
     </section>
     <section class="features" id="features">
       <div class="feature-card">
