@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zeptro — Public View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #1976d2;
+      --accent: #90caf9;
+      --bg-gradient: linear-gradient(120deg, #1976d2 0%, #42a5f5 100%);
+      --card-bg: #fff;
+      --card-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f8fb;
+      color: #222;
+    }
+    header {
+      background: var(--bg-gradient);
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 2px 8px rgba(25,118,210,0.09);
+    }
+    .logo {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      font-size: 1.4em;
+      background: #fff3;
+      color: #fff;
+      border-radius: 50%;
+      padding: 5px 10px;
+    }
+    .auth-links {
+      display: flex; gap: 14px;
+    }
+    .auth-links a {
+      text-decoration: none;
+      color: #fff;
+      background: transparent;
+      padding: 9px 22px;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s, border 0.2s;
+      font-size: 1.1em;
+    }
+    .auth-links a.signup {
+      background: #fff;
+      color: var(--primary);
+      border: 2px solid #fff;
+      margin-left: 0;
+    }
+    .auth-links a:hover {
+      background: #1565c0;
+      color: #fff;
+      border-color: #1976d2;
+    }
+    .auth-links a.signup:hover {
+      background: var(--accent);
+      color: #1976d2;
+    }
+    main {
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+    .hero {
+      background: var(--bg-gradient);
+      color: #fff;
+      padding: 70px 20px 40px 20px;
+      margin-bottom: 0;
+      box-shadow: 0 6px 32px rgba(25,118,210,0.05);
+    }
+    .hero h1 {
+      font-size: 2.8em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      font-size: 1.3em;
+      margin: 0 0 28px 0;
+      opacity: 0.96;
+    }
+    .cta-btn {
+      background: #fff;
+      color: var(--primary);
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2em;
+      padding: 14px 42px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(25,118,210,0.10);
+      transition: background 0.2s, color 0.2s, box-shadow 0.22s;
+    }
+    .cta-btn:hover {
+      background: var(--accent);
+      color: #0d47a1;
+      box-shadow: 0 4px 18px rgba(25,118,210,0.18);
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 50px 15px 25px 15px;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      flex: 1 1 270px;
+      max-width: 320px;
+      padding: 35px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 36px rgba(25,118,210,0.13);
+    }
+    .feature-icon {
+      font-size: 2.8em;
+      color: var(--primary);
+      margin-bottom: 18px;
+    }
+    .feature-title {
+      font-size: 1.25em;
+      font-weight: 600;
+      color: #1976d2;
+      margin-bottom: 9px;
+    }
+    .feature-desc {
+      font-size: 1.08em;
+      color: #444;
+      opacity: 0.93;
+    }
+    footer {
+      background: #eee;
+      color: #444;
+      text-align: center;
+      padding: 16px 10px;
+      font-size: 1.07em;
+      letter-spacing: .5px;
+      margin-top: 36px;
+    }
+    @media (max-width: 900px) {
+      .features { flex-direction: column; align-items: center; }
+      .feature-card { max-width: 90vw; min-width: 240px;}
+    }
+    @media (max-width: 600px) {
+      header { padding: 12px; }
+      .logo { font-size: 1.2em; }
+      .auth-links a { padding: 7px 10px; font-size: 1em; }
+      .hero { padding: 40px 8px 24px 8px; }
+      .hero h1 { font-size: 2em; }
+      .features { padding: 24px 6px 10px 6px; }
+      footer { font-size: .97em; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('loggedIn') === 'true') {
+        window.location.href = 'dashboard.html';
+      }
+      // Smooth scroll for CTA
+      document.getElementById('cta-features').onclick = function(e){
+        e.preventDefault();
+        document.getElementById('features').scrollIntoView({behavior: 'smooth'});
+      }
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <span class="logo"><span class="logo-icon">⚡</span> Zeptro</span>
+    <nav class="auth-links">
+      <a href="login/login.html">Login</a>
+      <a href="signup.html" class="signup">Sign Up</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Welcome to Zeptro</h1>
+      <p>The modern platform for productivity, collaboration, and innovation. Join Zeptro today and unlock your potential!</p>
+      <button class="cta-btn" id="cta-features">Learn More</button>
+    </section>
+    <section class="features" id="features">
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <div class="feature-title">Fast & Reliable</div>
+        <div class="feature-desc">Experience lightning-fast performance with robust, reliable architecture.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Secure by Design</div>
+        <div class="feature-desc">Your data is protected with industry-leading security and privacy standards.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-title">Collaborate Easily</div>
+        <div class="feature-desc">Work together in real-time, share ideas, and achieve more as a team.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <div class="feature-title">Customizable</div>
+        <div class="feature-desc">Tailor Zeptro to your needs with powerful settings and integrations.</div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Zeptro. All rights reserved. | <a href="mailto:support@zeptro.com" style="color:#1976d2;text-decoration:none;">Contact Support</a>
+  </footer>
+</body>
+</html>

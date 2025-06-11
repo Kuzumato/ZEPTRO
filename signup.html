@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | Zeptro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f6fafd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100vw;
+    }
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100vw;
+    }
+    .forms-row {
+      display: flex;
+      flex-direction: row;
+      gap: 48px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 64px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(25,118,210,0.09);
+      width: 380px;
+      max-width: 95vw;
+      padding: 32px 26px 26px 26px;
+      box-sizing: border-box;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+    .card h2 {
+      color: #1976d2;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .subtitle {
+      font-size: 0.98em;
+      color: #888;
+      text-align: center;
+      margin-bottom: 18px;
+      margin-top: 0;
+    }
+    label {
+      font-size: 1em;
+      margin-bottom: 3px;
+      color: #324057;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      font-size: 1em;
+      padding: 8px 10px;
+      margin-bottom: 2px;
+      border: 1.5px solid #ccd7e6;
+      border-radius: 5px;
+      transition: border 0.15s;
+      outline: none;
+      box-sizing: border-box;
+      background: #f6fafd;
+    }
+    input:focus, select:focus {
+      border-color: #1976d2;
+      background: #fff;
+    }
+    .checkbox-row {
+      margin: 16px 0 0 0;
+      display: flex;
+      align-items: center;
+      font-size: 0.97em;
+      color: #555;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-right: 7px;
+      accent-color: #1976d2;
+    }
+    .actions-row {
+      margin-top: 17px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+    }
+    .btn {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 3.5px;
+      font-size: 1.08em;
+      font-weight: 600;
+      padding: 12px 0;
+      cursor: pointer;
+      transition: background 0.15s;
+      width: 100%;
+    }
+    .btn:hover {
+      background: #1256a0;
+    }
+    .login-link {
+      text-align: center;
+      margin-top: 7px;
+      color: #1976d2;
+      text-decoration: none;
+      font-size: .98em;
+      display: block;
+      width: 100%;
+      transition: text-decoration 0.13s;
+    }
+    .login-link:hover {
+      text-decoration: underline;
+    }
+    .error-message, .success-message {
+      margin-top: 11px;
+      font-size: 1em;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+    .error-message { color: #d32f2f; }
+    .success-message { color: #388e3c; }
+
+    @media (max-width: 900px) {
+      .forms-row { flex-direction: column; align-items: center; margin-top: 32px;}
+      .card { width: 98vw; max-width: 420px; }
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const signupForm = document.getElementById('signup-form');
+      const errorMsg = document.getElementById('form-error');
+      const successMsg = document.getElementById('form-success');
+
+      signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        errorMsg.style.display = 'none';
+        successMsg.style.display = 'none';
+
+        // KYC Section
+        const fullName = signupForm.elements['fullName'].value.trim();
+        const dob = signupForm.elements['dob'].value;
+        const nationality = signupForm.elements['nationality'].value.trim();
+        const idType = signupForm.elements['idType'].value;
+        const idNumber = signupForm.elements['idNumber'].value.trim();
+        const address = signupForm.elements['address'].value.trim();
+        const kycEmail = signupForm.elements['kycEmail'].value.trim();
+        const phone = signupForm.elements['phone'].value.trim();
+
+        // Game Section
+        const username = signupForm.elements['username'].value.trim();
+        const gameEmail = signupForm.elements['gameEmail'].value.trim();
+        const password = signupForm.elements['password'].value;
+        const confirmPassword = signupForm.elements['confirmPassword'].value;
+        const agree = signupForm.elements['agree'].checked;
+
+        // Validation
+        if (!fullName || !dob || !nationality || !idType || !idNumber || !address || !kycEmail || !phone ||
+            !username || !gameEmail || !password || !confirmPassword) {
+          errorMsg.textContent = 'Please fill in all required fields in both sections.';
+          errorMsg.style.display = 'block'; return;
+        }
+        if (!/^[^@]+@[^@]+\.[^@]+$/.test(kycEmail) || !/^[^@]+@[^@]+\.[^@]+$/.test(gameEmail)) {
+          errorMsg.textContent = 'Enter valid email addresses.';
+          errorMsg.style.display = 'block'; return;
+        }
+        if (!/^[0-9]{10,15}$/.test(phone)) {
+          errorMsg.textContent = 'Enter a valid phone number (10-15 digits).';
+          errorMsg.style.display = 'block'; return;
+        }
+        if (!/^[A-Za-z0-9\- ]{5,}$/.test(idNumber)) {
+          errorMsg.textContent = 'Enter a valid ID number.';
+          errorMsg.style.display = 'block'; return;
+        }
+        if (password.length < 6) {
+          errorMsg.textContent = 'Password must be at least 6 characters.';
+          errorMsg.style.display = 'block'; return;
+        }
+        if (password !== confirmPassword) {
+          errorMsg.textContent = 'Passwords do not match.';
+          errorMsg.style.display = 'block'; return;
+        }
+        if (!agree) {
+          errorMsg.textContent = 'You must agree to the Terms & Privacy Policy.';
+          errorMsg.style.display = 'block'; return;
+        }
+
+        // Save (simulate)
+        localStorage.setItem('kycCompleted', 'true');
+        localStorage.setItem('kycName', fullName);
+        localStorage.setItem('gameSignup', 'true');
+        localStorage.setItem('gameUser', username);
+
+        successMsg.textContent = 'Sign up and KYC completed! Redirecting...';
+        successMsg.style.display = 'block';
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1700);
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="main-wrapper">
+    <form id="signup-form" autocomplete="off" style="width:100%;max-width:900px;">
+      <div class="forms-row">
+        <!-- KYC Sign Up -->
+        <div class="card">
+          <h2>KYC Sign Up</h2>
+          <div class="subtitle">
+            KYC stands for <b>Know Your Customer</b>. Please complete the form below to verify your identity.
+          </div>
+          <label for="fullName">Full Name*</label>
+          <input type="text" name="fullName" id="fullName" placeholder="Your full legal name" required>
+
+          <label for="dob">Date of Birth*</label>
+          <input type="date" name="dob" id="dob" required>
+
+          <label for="nationality">Nationality*</label>
+          <input type="text" name="nationality" id="nationality" placeholder="e.g. Indian, American" required>
+
+          <label for="idType">ID Type*</label>
+          <select name="idType" id="idType" required>
+            <option value="">Select ID Type</option>
+            <option value="passport">Passport</option>
+            <option value="national_id">National ID Card</option>
+            <option value="driver_license">Driver's License</option>
+            <option value="voter_card">Voter Card</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="idNumber">ID Number*</label>
+          <input type="text" name="idNumber" id="idNumber" placeholder="Enter your ID number" required>
+
+          <label for="address">Residential Address*</label>
+          <input type="text" name="address" id="address" placeholder="Full address" required>
+
+          <label for="kycEmail">Email Address*</label>
+          <input type="email" name="kycEmail" id="kycEmail" placeholder="Email" required>
+
+          <label for="phone">Phone Number*</label>
+          <input type="text" name="phone" id="phone" placeholder="10-15 digits" required>
+        </div>
+        <!-- Game Sign Up -->
+        <div class="card">
+          <h2>Game Sign Up</h2>
+          <div class="subtitle">
+            Create your Zeptro game account. Use a unique username and a strong password.
+          </div>
+          <label for="username">Username*</label>
+          <input type="text" name="username" id="username" placeholder="Choose a username" required>
+
+          <label for="gameEmail">Email Address*</label>
+          <input type="email" name="gameEmail" id="gameEmail" placeholder="Email" required>
+
+          <label for="password">Password*</label>
+          <input type="password" name="password" id="password" placeholder="Password" required>
+
+          <label for="confirmPassword">Confirm Password*</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+
+          <div class="checkbox-row">
+            <input type="checkbox" name="agree" id="agree" required>
+            <label for="agree" style="margin:0;">
+              I agree to the <a href="terms.html" style="color:#1976d2;text-decoration:underline;" target="_blank">Terms</a> &amp; <a href="privacy.html" style="color:#1976d2;text-decoration:underline;" target="_blank">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="actions-row" style="max-width:380px;margin:32px auto 0 auto;">
+        <button class="btn" type="submit">Sign Up</button>
+        <a class="login-link" href="login/login.html">Already have an account? Login</a>
+        <div class="success-message" id="form-success"></div>
+        <div class="error-message" id="form-error"></div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
