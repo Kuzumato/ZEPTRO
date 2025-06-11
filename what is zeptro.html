@@ -180,6 +180,24 @@
       border-radius: 26px;
       box-shadow: 0 0 34px #000c;
       backdrop-filter: blur(5px);
+      min-height: 65vh;
+    }
+    /* Smooth fade transition for sections */
+    .content > section {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 0;
+      transition: opacity 0.66s cubic-bezier(.7,0,.3,1);
+    }
+    .content > section:not(.hidden) {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+      z-index: 2;
     }
     .main-title {
       font-size: 3.2rem;
@@ -247,7 +265,7 @@
     }
     .hidden { display: none; }
 
-    /* Botton styles */
+    /* Button styles */
     .zeptro-action-buttons {
       display: flex;
       justify-content: center;
@@ -334,7 +352,7 @@
         padding: 0.7em 0;
       }
     }
-    /* Progress Bar Section ... (unchanged) ... */
+    /* Roadmap Section */
     .roadmap-container {
       margin: 0 auto 2.6rem auto;
       background: rgba(20,28,58,0.32);
@@ -433,6 +451,37 @@
       .phase-status { min-width: auto; margin: 0.1em 0 0.3em 0; }
       .phase-desc { margin-left: 0; margin-top: 0.18em;}
     }
+    /* Footer */
+    footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem 0 0.6rem 0;
+      background: rgba(10,20,40,0.67);
+      color: #b6eeff;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 0 24px #0e1337;
+      width: 100%;
+      margin-top: 2rem;
+      animation: footerFadeIn 1.2s;
+    }
+    @keyframes footerFadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    footer a:hover {
+      color: #fff;
+      text-shadow: 0 0 7px var(--accent2);
+    }
   </style>
 </head>
 <body>
@@ -483,7 +532,7 @@
         <div class="panel-inner">
           <div class="panel-title">🎯 Mission</div>
           <div class="panel-text">
-            At Zeptro, we believe your skills should build your future. We’re here to give every gamer the power to earn real rewards, grow real wealth, and shape their destiny—not through luck, but through dedication, passion, and strategy.<br><br>
+            At Zeptro, we believe your skills should build your future. We’re here to give every gamer the power to earn real rewards, grow real wealth, and shape their destiny—not through luck, but through mastery.<br>
             Zeptro is where your talent is valued, your victories are meaningful, and your grind has purpose.
           </div>
           <div class="panel-title">🌍 Vision</div>
@@ -498,17 +547,16 @@
         <div class="panel-inner">
           <div class="panel-title">🎯 Mission</div>
           <div class="panel-text">
-            Zeptro’s mission is to empower gamers to generate sustainable, real-world wealth through skill-based gameplay. By focusing on performance-based rewards rather than pay-to-win models, Zeptro is positioned to redefine the gaming economy, enabling players to earn tangible value through dedication, talent, and strategy.<br><br>
+            Zeptro’s mission is to empower gamers to generate sustainable, real-world wealth through skill-based gameplay. By focusing on performance-based rewards rather than pay-to-win models, we’re redefining value in gaming.<br>
             Our platform integrates competitive gaming with blockchain-powered asset ownership, creating a secure, scalable ecosystem that aligns player incentives with long-term economic growth.
           </div>
           <div class="panel-title">🌍 Vision</div>
           <div class="panel-text">
-            Zeptro aims to build a decentralized, equitable gaming ecosystem where success is driven by merit and community participation. We envision a future where gamers, regardless of background or geography, can achieve upward mobility through their skills.<br><br>
-            Our platform’s architecture combines decentralized finance (DeFi), NFTs, and community governance to ensure transparency, security, and shared ownership. Zeptro is committed to leading the evolution of the play-to-earn landscape by delivering measurable value to both players and stakeholders, while fostering a thriving, sustainable gaming economy.
+            Zeptro aims to build a decentralized, equitable gaming ecosystem where success is driven by merit and community participation. We envision a future where gamers, regardless of background, can achieve financial freedom through play.<br>
+            Our platform’s architecture combines decentralized finance (DeFi), NFTs, and community governance to ensure transparency, security, and shared ownership. Zeptro is committed to leading the next evolution of gaming and digital economies.
           </div>
         </div>
       </div>
-      <!-- ...other about content unchanged... -->
       <section>
         <h2>What is Zeptro?</h2>
         <p>Zeptro is a next-gen play-to-earn gaming universe, featuring <b>Dominion</b>, our flagship game, and a powerful crypto and NFT ecosystem.</p>
@@ -691,6 +739,11 @@
     </section>
   </main>
   <div class="spacer"></div>
+  <footer>
+    © 2025 Zeptro &nbsp;|&nbsp; 
+    <a href="mailto:contact@zeptro.com">Contact</a> &nbsp;|&nbsp;
+    <a href="#">Twitter</a>
+  </footer>
   <script>
     function showPage(page) {
       let sections = ['about', 'features', 'tokenomics', 'nfts', 'lore', 'progress'];
@@ -700,11 +753,13 @@
         let nav = document.getElementById('nav-' + s);
         if (nav) nav.classList.remove('active');
       });
-      let showSec = document.getElementById(page + '-section');
-      if (showSec) showSec.classList.remove('hidden');
-      let showNav = document.getElementById('nav-' + page);
-      if (showNav) showNav.classList.add('active');
-      window.scrollTo({top: 0, behavior: 'smooth'});
+      setTimeout(() => {
+        let showSec = document.getElementById(page + '-section');
+        if (showSec) showSec.classList.remove('hidden');
+        let showNav = document.getElementById('nav-' + page);
+        if (showNav) showNav.classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }, 100); // Small delay for fade-out
     }
     // Default: show About
     showPage('about');
@@ -712,7 +767,7 @@
       const offset = window.pageYOffset;
       document.body.style.backgroundPosition = `center ${offset * 0.13}px`;
     });
-    // Optionally, make logo a home button:
+    // Make logo a home button:
     document.querySelector('.logo-img').addEventListener('click', function() {
       showPage('about');
     });
@@ -720,31 +775,18 @@
     function backToPublicView() {
       window.location.href = "/";
     }
-    // BLOCK COPY, SELECTION, RIGHT-CLICK, DRAG
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-    document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey || e.metaKey) && ['c','x','v','a','u','s'].includes(e.key.toLowerCase())) {
-        e.preventDefault();
-      }
-    });
-    document.addEventListener('dragstart', function(e) { e.preventDefault(); });
-
     // SLIDE DOWN PANELS FOR GAMERS/INVESTORS
     const gamersBtn = document.getElementById("for-gamers-btn");
     const investorsBtn = document.getElementById("for-investors-btn");
     const gamersPanel = document.getElementById("gamers-panel");
     const investorsPanel = document.getElementById("investors-panel");
-
-    // Hide both panels initially
     gamersPanel.classList.remove('active');
     investorsPanel.classList.remove('active');
-
     // Panel logic: only one visible, toggle
     gamersBtn.onclick = function() {
       if (!gamersPanel.classList.contains('active')) {
         gamersPanel.classList.add('active');
         investorsPanel.classList.remove('active');
-        // Scroll to panel if not in view
         setTimeout(() => {
           gamersPanel.scrollIntoView({behavior:'smooth', block:'center'});
         }, 130);
