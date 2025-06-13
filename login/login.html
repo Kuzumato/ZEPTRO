@@ -24,6 +24,34 @@
       align-items: center;
       justify-content: center;
     }
+    /* Back to Public View Button */
+    .back-public-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      display: flex;
+      align-items: center;
+      background: #1b2735;
+      border: 2px solid #00FFDD;
+      color: #00FFDD;
+      border-radius: 50px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1em;
+      transition: background 0.2s, color 0.2s;
+      z-index: 10;
+    }
+    .back-public-btn:hover {
+      background: #00FFDD;
+      color: #1b2735;
+    }
+    .back-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
     /* Login Container */
     .login-container {
       width: 350px;
@@ -56,7 +84,7 @@
       background: #1a1a1a;
     }
     /* Button styling */
-    .login-container button {
+    .login-container button[type="submit"] {
       width: 100%;
       padding: 12px;
       margin-top: 10px;
@@ -68,7 +96,7 @@
       cursor: pointer;
       transition: background 0.3s ease;
     }
-    .login-container button:hover {
+    .login-container button[type="submit"]:hover {
       background: #00cccc;
     }
     /* Forgot password link */
@@ -85,6 +113,11 @@
   </style>
 </head>
 <body>
+  <!-- Back to Public View Button (now compact) -->
+  <button class="back-public-btn" onclick="backToPublicView()" title="Back to Public View">
+    <svg class="back-icon" viewBox="0 0 24 24" fill="none"><path d="M13.5 19L7.5 12L13.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Back</span>
+  </button>
   <div class="login-container">
     <h2>Login</h2>
     <form id="loginForm">
@@ -94,20 +127,20 @@
       <a href="#">Forgot password?</a>
     </form>
   </div>
-
   <script>
-    <!-- BACK TO PUBLIC VIEW BUTTON (now compact) -->
-  <button class="back-public-btn" onclick="backToPublicView()" title="Back to Public View">
-    <svg class="back-icon" viewBox="0 0 24 24" fill="none"><path d="M13.5 19L7.5 12L13.5 5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span>Back</span>
-  </button>
+    // Function for Back to Public View button
+    function backToPublicView() {
+      // Change this URL to where you want the button to go
+      window.location.href = "../index.html";
+    }
+
     // Wait for the DOM to fully load
     document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("loginForm");
 
       form.addEventListener("submit", function (event) {
         event.preventDefault();
-        
+
         // Get user input from the form fields
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
@@ -118,7 +151,8 @@
 
         // Validate credentials and redirect if correct
         if (username === validUsername && password === validPassword) {
-          window.location.href = "dashboard/dashboard.html";} else {
+          window.location.href = "dashboard/dashboard.html";
+        } else {
           alert("Invalid username or password. Try again.");
         }
       });
