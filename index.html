@@ -34,12 +34,13 @@
       align-items: center;
       gap: 10px;
     }
-    .logo-icon {
-      font-size: 1.4em;
+    .logo-img {
+      height: 38px;
+      vertical-align: middle;
+      margin-right: 10px;
+      border-radius: 5px;
       background: #fff3;
-      color: #fff;
-      border-radius: 50%;
-      padding: 5px 10px;
+      /* Optionally add a box-shadow or border */
     }
     .auth-links {
       display: flex; gap: 14px;
@@ -188,7 +189,10 @@
 </head>
 <body>
   <header>
-    <span class="logo"><span class="logo-icon">⚡</span> Zeptro</span>
+    <span class="logo">
+      <img src="LOGO.png" alt="Zeptro Logo" class="logo-img">
+      Zeptro
+    </span>
     <nav class="auth-links">
       <a href="login/login.html">Login</a>
       <a href="signup.html" class="signup">Sign Up</a>
