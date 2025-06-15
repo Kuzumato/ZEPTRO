@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | Zeptro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/signup.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <form id="signup-form" autocomplete="off" style="width:100%;max-width:900px;">
+      <div class="forms-row">
+        <!-- KYC Sign Up -->
+        <div class="card">
+          <h2>KYC Sign Up</h2>
+          <div class="subtitle">
+            KYC stands for <b>Know Your Customer</b>. Please complete the form below to verify your identity.
+          </div>
+          <label for="fullName">Full Name*</label>
+          <input type="text" name="fullName" id="fullName" placeholder="Your full legal name" required>
+
+          <label for="dob">Date of Birth*</label>
+          <input type="date" name="dob" id="dob" required>
+
+          <label for="nationality">Nationality*</label>
+          <input type="text" name="nationality" id="nationality" placeholder="e.g. Indian, American" required>
+
+          <label for="idType">ID Type*</label>
+          <select name="idType" id="idType" required>
+            <option value="">Select ID Type</option>
+            <option value="passport">Passport</option>
+            <option value="national_id">National ID Card</option>
+            <option value="driver_license">Driver's License</option>
+            <option value="voter_card">Voter Card</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="idNumber">ID Number*</label>
+          <input type="text" name="idNumber" id="idNumber" placeholder="Enter your ID number" required>
+
+          <label for="address">Residential Address*</label>
+          <input type="text" name="address" id="address" placeholder="Full address" required>
+
+          <label for="kycEmail">Email Address*</label>
+          <input type="email" name="kycEmail" id="kycEmail" placeholder="Email" required>
+
+          <label for="phone">Phone Number*</label>
+          <input type="text" name="phone" id="phone" placeholder="10-15 digits" required>
+
+          <label for="idUpload">Upload ID (PDF, JPG, PNG)*</label>
+          <input type="file" id="idUpload" name="idUpload" accept=".pdf,.jpg,.jpeg,.png" required>
+
+          <label for="selfieUpload">Upload a Selfie*</label>
+          <input type="file" id="selfieUpload" name="selfieUpload" accept=".jpg,.jpeg,.png" required>
+        </div>
+        <!-- Game Sign Up -->
+        <div class="card">
+          <h2>Game Sign Up</h2>
+          <div class="subtitle">
+            Create your Zeptro game account. Use a unique username and a strong password.
+          </div>
+          <label for="username">Username*</label>
+          <input type="text" name="username" id="username" placeholder="Choose a username" required>
+
+          <label for="gameEmail">Email Address*</label>
+          <input type="email" name="gameEmail" id="gameEmail" placeholder="Email" required>
+
+          <label for="password">Password*</label>
+          <input type="password" name="password" id="password" placeholder="Password" required>
+
+          <label for="confirmPassword">Confirm Password*</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+
+          <div class="checkbox-row">
+            <input type="checkbox" name="agree" id="agree" required>
+            <label for="agree" style="margin:0;">
+              I agree to the <a href="terms.html" style="color:#1976d2;text-decoration:underline;" target="_blank">Terms</a> &amp; <a href="privacy.html" style="color:#1976d2;text-decoration:underline;" target="_blank">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="actions-row" style="max-width:380px;margin:32px auto 0 auto;">
+        <button class="btn" type="submit">Sign Up</button>
+        <a class="login-link" href="login.html">Already have an account? Login</a>
+        <div class="success-message" id="form-success"></div>
+        <div class="error-message" id="form-error"></div>
+      </div>
+    </form>
+  </div>
+  <script src="styles/zeptro.js"></script>
+</body>
+</html>

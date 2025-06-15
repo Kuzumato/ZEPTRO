@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zeptro — Public View</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Futuristic font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles/zeptro.css">
+  <link rel="stylesheet" href="styles/public-view.css">
+</head>
+<body>
+  <header>
+    <span class="logo">
+      <img src="Pictures/LOGO.png" alt="Zeptro Logo" class="logo-img">
+      <span class="logo-text">Zeptro</span>
+    </span>
+    <nav class="main-nav">
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <nav class="auth-links">
+      <a href="login.html">Login</a>
+      <a href="signup.html" class="signup">Sign Up</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to <span class="brand-accent">Zeptro</span></h1>
+        <p class="hero-subtitle">The modern platform for productivity, collaboration, and innovation.<br>
+          Join Zeptro today and unlock your potential!</p>
+        <div class="hero-cta-row">
+          <a href="signup.html" class="cta-btn primary" id="cta-signup">Get Started</a>
+          <a href="what is zeptro.html" class="cta-btn secondary" id="cta-features">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="Pictures/hero-illustration.svg" alt="Futuristic Collaboration" />
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <h2 class="section-title">Platform Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <div class="feature-title">Fast & Reliable</div>
+          <div class="feature-desc">Experience lightning-fast performance with a robust, scalable architecture. Built for serious productivity and uptime.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">Secure by Design</div>
+          <div class="feature-desc">Your data is protected with industry-leading security, privacy, and compliance standards—always.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <div class="feature-title">Collaborate Easily</div>
+          <div class="feature-desc">Work together in real-time, share ideas, assign tasks, and achieve more as a team, wherever you are.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <div class="feature-title">Customizable</div>
+          <div class="feature-desc">Tailor Zeptro to your workflow with powerful settings, plugins, and third-party integrations.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">Mobile Ready</div>
+          <div class="feature-desc">Access Zeptro on any device. Enjoy a seamless experience, whether at your desk or on the go.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">Analytics & Insights</div>
+          <div class="feature-desc">Gain actionable insights with real-time analytics, reports, and dashboards to drive your success.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <h2 class="section-title">Why Zeptro?</h2>
+      <div class="about-content">
+        <p>
+          Zeptro was founded to empower teams and individuals with cutting-edge tools that make work seamless, secure, and enjoyable. Whether you're a startup, enterprise, or a creative group, Zeptro adapts to your needs. It's more than just a platform—it's your digital launchpad.
+        </p>
+        <ul class="about-list">
+          <li><strong>24/7 Support:</strong> Our team is always here to help you succeed.</li>
+          <li><strong>Continuous Updates:</strong> We add new features and improvements regularly.</li>
+          <li><strong>Inclusive Community:</strong> Join a growing network of innovators and creators.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Is Zeptro free to use?</summary>
+          <p>Zeptro offers a free tier with core features. Advanced features come with our Pro and Enterprise plans.</p>
+        </details>
+        <details>
+          <summary>How is my data kept secure?</summary>
+          <p>Your data is secured using encryption at rest and in transit, two-factor authentication, and regular security audits.</p>
+        </details>
+        <details>
+          <summary>Can I use Zeptro on my phone?</summary>
+          <p>Yes! Zeptro is fully responsive and works on all modern smartphones and tablets.</p>
+        </details>
+        <details>
+          <summary>How do I get started?</summary>
+          <p>Just <a href="signup.html">sign up</a> for free—no credit card required!</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-content">
+        <form class="contact-form" id="contactForm" autocomplete="off">
+          <div class="form-group">
+            <input type="text" id="contactName" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="contactEmail" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea id="contactMessage" name="message" placeholder="How can we help you?" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="cta-btn primary">Send Message</button>
+          <div class="form-message" id="formMsg"></div>
+        </form>
+        <div class="contact-info">
+          <p><strong>Email:</strong> <a href="mailto:support@zeptro.com">support@zeptro.com</a></p>
+          <p><strong>Follow us:</strong>
+            <a href="#" class="social-icon" title="Twitter"><img src="Pictures/twitter.svg" alt="Twitter"></a>
+            <a href="#" class="social-icon" title="GitHub"><img src="Pictures/github.svg" alt="GitHub"></a>
+            <a href="#" class="social-icon" title="Discord"><img src="Pictures/discord.svg" alt="Discord"></a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Zeptro. All rights reserved. | <a href="mailto:support@zeptro.com" style="color:#1976d2;text-decoration:none;">Contact Support</a>
+  </footer>
+  <script src="styles/zeptro.js"></script>
+  <script src="scripts/public-view.js"></script>
+</body>
+</html>
